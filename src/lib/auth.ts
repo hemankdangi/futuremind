@@ -5,7 +5,6 @@ import { db } from "@/db";
 import * as schema from "@/db/schema";
 
 export const auth = betterAuth({
-  baseURL: process.env.BETTER_AUTH_URL,
   socialProviders: {
     google: { 
       clientId: process.env.GOOGLE_CLIENT_ID as string, 
