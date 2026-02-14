@@ -202,9 +202,7 @@ export const SignUpView = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <Button
-                    onClick={() => {
-                      () => onSocial("google");
-                    }}
+                    onClick={() => onSocial("google")}
                     disabled={pending}
                     variant="outline"
                     type="button"
@@ -213,9 +211,7 @@ export const SignUpView = () => {
                     <FaGoogle />
                   </Button>
                   <Button
-                    onClick={() => {
-                      () => onSocial("github");
-                    }}
+                    onClick={() => onSocial("github")}
                     disabled={pending}
                     variant="outline"
                     type="button"
@@ -236,7 +232,7 @@ export const SignUpView = () => {
               </div>
             </form>
           </Form>
-          <div className="bg-radial from-cyan-600 to-cyan-800 relative hidden md:flex flex-col gap-y-4 items-center justify-center">
+          <div className="bg-radial from-sidebar-accent to-sidebar relative hidden md:flex flex-col gap-y-4 items-center justify-center">
             <img src="/logo.svg" alt="image" className="h-[92px] w-[92px]" />
             <p className="text-2xl font-semibold text-white">FutureMind</p>
           </div>

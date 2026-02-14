@@ -12,6 +12,9 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.1.0",
+    "@better-auth/cli": "^1.2.8",
+    "@dicebear/collection": "^9.2.2",
+    "@dicebear/core": "^9.2.2",
     "@hookform/resolvers": "^5.2.2",
     "@neondatabase/serverless": "^1.0.0",
     "better-auth": "^1.2.8",
@@ -37,6 +40,7 @@
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
     "vaul": "^1.1.2",
+    "ws": "^8.19.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
