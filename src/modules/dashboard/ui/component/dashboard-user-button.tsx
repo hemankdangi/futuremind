@@ -1,3 +1,4 @@
+"use client"
 import { authClient } from "@/lib/auth-client";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { GeneratedAvatar } from "@/components/generated-avatar";
