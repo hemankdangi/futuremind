@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { agents } from "@/db/schema";
 import { createTRPCRouter, protectProcedure } from "@/trpc/init";
-import { agentInsertSchema } from "../schemas";
+import { agentInsertSchema, agentsUpdateSchema } from "../schemas";
 import { z } from "zod";
 import { eq, sql, getTableColumns, and, ilike, desc, count } from "drizzle-orm";
 import {
@@ -13,7 +13,43 @@ import {
 import { TRPCError } from "@trpc/server";
 
 export const agentRouter = createTRPCRouter({
-  // TODO: change 'getOne' to use 'protectProcedure'
+  update: protectProcedure
+    .input(agentsUpdateSchema)
+    .mutation(async ({ ctx, input }) => {
+      const [updatedAgent] = await db
+        .update(agents)
+        .set(input)
+        .where(
+          and(eq(agents.id, input.id), eq(agents.userId, ctx.auth.user.id))
+        )
+        .returning();
+      if (!updatedAgent) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Agent not found",
+        });
+      }
+      return updatedAgent;
+    }),
+  remove: protectProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const [removedAgent] = await db
+        .delete(agents)
+        .where(
+          and(eq(agents.id, input.id), eq(agents.userId, ctx.auth.user.id))
+        )
+        .returning();
+      if (!removedAgent) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Agent not found",
+        });
+      }
+
+      return removedAgent;
+    }),
+
   getOne: protectProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ input, ctx }) => {
@@ -27,10 +63,10 @@ export const agentRouter = createTRPCRouter({
         .where(
           and(eq(agents.id, input.id), eq(agents.userId, ctx.auth.user.id))
         );
-          
-        if(!existingAgent){
-          throw new TRPCError({code: "NOT_FOUND", message: "Agent not found"})
-        }
+
+      if (!existingAgent) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Agent not found" });
+      }
 
       return existingAgent;
     }),
