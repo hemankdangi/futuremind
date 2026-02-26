@@ -26,7 +26,10 @@ export const meetingsRouter = createTRPCRouter({
         );
 
       if (!existingMeeting) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Meeting not found" });
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Meeting not found",
+        });
       }
 
       return existingMeeting;
@@ -46,7 +49,6 @@ export const meetingsRouter = createTRPCRouter({
     )
     .query(async ({ ctx, input }) => {
       const { search, page, pageSize } = input;
-      
 
       const data = await db
         .select({
