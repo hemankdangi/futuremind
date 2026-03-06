@@ -21,7 +21,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { MeetingGetOne } from "../../types";
-import { meetingsInsertSchema } from "../../server/schemas";
+import { meetingsInsertSchema } from "../../schemas";
 import { useState } from "react";
 import { NewAgentDialog } from "@/modules/agents/ui/components/new-agent-dialog";
 
@@ -77,7 +77,7 @@ export const MeetingForm = ({
             trpc.meetings.getOne.queryOptions({ id: initialValues.id })
           );
         }
-        onSuccess?.();
+        onSuccess?.("");
       },
       onError: (error) => {
         toast.error(error.message);
