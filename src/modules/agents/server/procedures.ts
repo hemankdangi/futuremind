@@ -5,8 +5,8 @@ import { agentInsertSchema, agentsUpdateSchema } from "../schemas";
 import { z } from "zod";
 import { eq, sql, getTableColumns, and, ilike, desc, count } from "drizzle-orm";
 import {
-  DEFUAULT_PAGE,
-  DEFUAULT_PAGE_SIZE,
+  DEFAULT_PAGE,
+  DEFAULT_PAGE_SIZE,
   MAX_PAGE_SIZE,
   MIN_PAGE_SIZE,
 } from "@/constants";
@@ -74,12 +74,12 @@ export const agentRouter = createTRPCRouter({
   getMany: protectProcedure
     .input(
       z.object({
-        page: z.number().default(DEFUAULT_PAGE),
+        page: z.number().default(DEFAULT_PAGE),
         pageSize: z
           .number()
           .min(MIN_PAGE_SIZE)
           .max(MAX_PAGE_SIZE)
-          .default(DEFUAULT_PAGE_SIZE),
+          .default(DEFAULT_PAGE_SIZE),
         search: z.string().nullish(),
       })
     )
